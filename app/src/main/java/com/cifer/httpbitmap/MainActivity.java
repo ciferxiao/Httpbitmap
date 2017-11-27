@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
     //获取网络图片 方法
     private void getHttpdata(String urlpath){
-        okhttpManager.asyncDownLoadImgtByUrl(urlpath, new OkhttpManager.Fun() {
+        okhttpManager.asyncDownLoadImgtByUrl(urlpath, new OkhttpManager.Fun3() {
             @Override
             public void onResponse(Bitmap bitmap) {
                 mbitmap=bitmap;
