@@ -3,8 +3,11 @@ package com.cifer.httpbitmap;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     private OkhttpManager okhttpManager;
 
+    private ListView listView;
 
     private ImageView imageView;
     private Bitmap mbitmap;
@@ -44,9 +48,15 @@ public class MainActivity extends AppCompatActivity {
 
         imageView = (ImageView)findViewById(R.id.imager);
 
-        ListView listView = (ListView) findViewById(R.id.list);
-        ListAdapter adapter = new ListAdapter(MainActivity.this,R.layout.list_item,list);
-        listView.setAdapter(adapter);
+        listView = (ListView) findViewById(R.id.list);
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(MainActivity.this, "this is itme :"+ i, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 
@@ -57,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
             //books[i].setMbookid(bitmap);
             list.add(books[i]);
         }
+        ListAdapter adapter = new ListAdapter(MainActivity.this,R.layout.list_item,list);
+        listView.setAdapter(adapter);
     }
 
     //获取网络图片 方法
