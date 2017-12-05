@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -17,14 +18,16 @@ import java.util.List;
 public class ListAdapter extends ArrayAdapter<Book> {
 
     private int resourceid;
+    private Context mcontext;
+
     public ListAdapter(Context context, int id,List<Book> objects){
         super(context,id,objects);
         resourceid = id;
-
+        mcontext = context;
     }
 
     @Override
-    public View getView(int i, View contextview, ViewGroup viewGroup) {
+    public View getView(final int i, View contextview, ViewGroup viewGroup) {
         ViewHolder viewHolder;
         Book book = getItem(i);
         View view;
@@ -40,6 +43,14 @@ public class ListAdapter extends ArrayAdapter<Book> {
         }
             viewHolder.imageView.setImageBitmap(book.getMbookid());
             viewHolder.textView.setText(book.getMbooktitle());
+            viewHolder.textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int x= i;
+                    Toast.makeText(mcontext,"you click textview " + x,Toast.LENGTH_SHORT).show();
+                }
+            });
+
         return view;
     }
 
